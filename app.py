@@ -50,7 +50,12 @@ for ticker in WATCHLIST:
         data = load_data(ticker)
 
         if data is None or data.empty:
-    raise Exception("No data")
+    @st.cache_data(ttl=900)
+def load_data(ticker):
+    data = yf.download(ticker, period="6mo", interval="1d")
+    if data is None or data.empty:
+        raise Exception("No data")
+    return data
 
         data["MA20"] = data["Close"].rolling(20).mean()
         data["MA50"] = data["Close"].rolling(50).mean()
