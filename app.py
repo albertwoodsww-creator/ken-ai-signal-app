@@ -40,7 +40,7 @@ def get_signal(price, ma20, ma50, rsi_value):
 
 @st.cache_data(ttl=900)
 def load_data(ticker):
-    data = yf.download(ticker, period="1y", interval="1d", auto_adjust=True, progress=False)
+    data = yf.download(ticker, period="6mo", interval="1d")
     return data
 
 rows = []
@@ -49,8 +49,8 @@ for ticker in WATCHLIST:
     try:
         data = load_data(ticker)
 
-        if data.empty:
-            continue
+        if data is None or data.empty:
+    raise Exception("No data")
 
         data["MA20"] = data["Close"].rolling(20).mean()
         data["MA50"] = data["Close"].rolling(50).mean()
