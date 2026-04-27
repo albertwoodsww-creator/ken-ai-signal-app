@@ -50,7 +50,7 @@ for ticker in WATCHLIST:
         data = load_data(ticker)
 
         if data is None or data.empty:
-    @st.cache_data(ttl=900)
+@st.cache_data(ttl=900)
 def load_data(ticker):
     data = yf.download(ticker, period="6mo", interval="1d")
     if data is None or data.empty:
