@@ -49,6 +49,7 @@ for ticker in WATCHLIST:
         data = load_data(ticker)
 
         if data is None or data.empty:
+            continue
 
 
 
