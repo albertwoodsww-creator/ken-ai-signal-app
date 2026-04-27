@@ -38,10 +38,9 @@ def get_signal(price, ma20, ma50, rsi_value):
     else:
         return "🟢 HOLD"
 
-
 def load_data(ticker):
-    data = yf.download(ticker, period="6mo", interval="1d")
-    return data
+data = yf.download(ticker, period="6mo", interval="1d")
+return data
 
 rows = []
 
